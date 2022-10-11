@@ -13,7 +13,7 @@ String user = '/get-user-by-access_token?access_token=$token';
 
 String shopSettings = '/shops/details/63?access_token';
 
-String token ='';
+String? token ='' ;
 
 
 

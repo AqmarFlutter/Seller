@@ -1,7 +1,6 @@
 // ignore_for_file: unnecessary_import
 import 'package:alshorjah_app/global_presentation/network/remote/dio_helper.dart';
 import 'package:alshorjah_app/layout/cubit/state.dart';
-import 'package:alshorjah_app/model/ShaorjahRegisterModel.dart';
 import 'package:alshorjah_app/model/ShopSettingsModel.dart';
 import 'package:alshorjah_app/modules/setting/views/setting_screen.dart';
 import 'package:bloc/bloc.dart';
