@@ -1,0 +1,241 @@
+// ignore_for_file: must_be_immutable
+import 'package:alshorjah_app/global_presentation/global_features/font_manager.dart';
+import 'package:alshorjah_app/global_presentation/network/local/cache.dart';
+import 'package:alshorjah_app/layout/cubit/cubit.dart';
+import 'package:alshorjah_app/layout/cubit/state.dart';
+import 'package:alshorjah_app/layout/views/layout_screen.dart';
+import 'package:alshorjah_app/modules/forgotPassword/views/forgotPassword_screen.dart';
+import 'package:alshorjah_app/modules/register/views/register_screen.dart';
+import 'package:buildcondition/buildcondition.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../constant.dart';
+import '../../../global_presentation/global_features/color_manager.dart';
+import '../../../global_presentation/global_widgets/primary_button.dart';
+import '../../../global_presentation/global_widgets/primary_textfield.dart';
+
+class LoginScreen extends StatelessWidget {
+  var emailController = TextEditingController();
+
+  LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<AlshorjahCubit, AlshorjahStates>(
+        builder: (context, state) {
+      var cubit = AlshorjahCubit.get(context);
+      var formKey = GlobalKey<FormState>();
+      return Form(
+        //key: formKey,
+        child: Scaffold(
+          body: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 100,
+                    ),
+                    child: Text(
+                      'Login to your account',
+                      style: TextStyle(
+                        color: ColorManager.black,
+                        fontSize: 23.sp,
+                        fontWeight: FontWeightManager.bold,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  if (cubit.insteadTextFormField)
+                    GlobalTextField(
+                      keyboardType: TextInputType.emailAddress,
+                      controller: emailController,
+                      hintText: 'Email',
+                    ),
+                  if (!cubit.insteadTextFormField)
+                    GlobalTextField(
+                      keyboardType: TextInputType.emailAddress,
+                      controller: emailController,
+                      hintText: 'Phone',
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        cubit.insteadTextFormField ? TextButton(
+                            onPressed: () {
+                              cubit.changeTextForm();
+                            },
+                            child: Text(
+                              'Use Phone Instead',
+                              style: TextStyle(
+                                color: ColorManager.black,
+                              ),
+                            ),
+                        ): TextButton(
+                            onPressed: ()
+                            {
+                              cubit.changeTextForm();
+                            },
+                            child: Text(
+                              'Use Email Instead',
+                              style: TextStyle(
+                                color: ColorManager.black,
+                              ),
+                            ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  GlobalTextField(
+                    keyboardType: TextInputType.visiblePassword,
+                    controller: cubit.passwordController,
+                    onChanged: (value) {
+                      return cubit.saveText(value);
+                    },
+                    onTab: () {},
+                    obscureText: cubit.isPassword,
+                    hintText: 'Password',
+                    suffixIcon: cubit.suffix != null
+                        ? IconButton(
+                            onPressed: () {
+                              cubit.changeShowPassword();
+                            },
+                            icon: Icon(
+                              cubit.suffix,
+                              color: Colors.deepOrange,
+                            ),
+                          )
+                        : null,
+                    // isPassword: suffix == isPassword ? true : false,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ForgotPassword()));
+                            },
+                            child: Text(
+                              'Forgot password?',
+                              style: TextStyle(
+                                color: ColorManager.black,
+                              ),
+                            )),
+                      ],
+                    ),
+                  ),
+                  BuildCondition(
+                    condition: state is! ShaorjahLoadingLogin,
+                    builder: (context) => PrimaryButton(
+                      title: 'Login',
+                      onPressed: () {
+                        cubit.userLogin(
+                          email: emailController.text,
+                          password: cubit.passwordController.text,
+                        );
+                        print(emailController.text);
+                        print('the password ${cubit.passwordController.text}');
+                        // if (formKey.currentState!.validate()) {
+                        //   cubit.userLogin(
+                        //     email: emailController.text,
+                        //     password: cubit.passwordController.text,
+                        //   );
+                        //   print(emailController.text);
+                        //   print('the password ${cubit.passwordController.text}');
+                        // }
+                      },
+                    ),
+                    fallback: (context) => Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                  // SizedBox(
+                  //   height: 80.h,
+                  // ),
+                  // Text(
+                  //   'or Login With',
+                  //   style: TextStyle(
+                  //     color: ColorManager.black.withAlpha(100),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 20.h,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     InkWell(
+                  //       onTap: () {},
+                  //       child: Image.asset(
+                  //         'assets/images/facebook.png',
+                  //         height: 35.h,
+                  //       ),
+                  //     ),
+                  //     SizedBox(
+                  //       width: 10.w,
+                  //     ),
+                  //     InkWell(
+                  //       onTap: () {},
+                  //       child: Image.asset(
+                  //         'assets/images/google-plus.png',
+                  //         height: 35.h,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(
+                  //   height: 50.h,
+                  // ),
+                  // Text(
+                  //   'Dont have an account?',
+                  //   style: TextStyle(
+                  //     color: ColorManager.black.withAlpha(100),
+                  //   ),
+                  // ),
+                  // TextButton(
+                  //     onPressed: () {
+                  //       Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: (context) => RegisterScreen()));
+                  //     },
+                  //     child: const Text(
+                  //       'Register Now',
+                  //       style: TextStyle(
+                  //         color: Colors.deepOrange,
+                  //       ),
+                  //     )),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }, listener: (context, state) {
+      if (state is ShaorjahSuccessLogin) {
+        if (state.shaorjahLoginModel.result) {
+          CacheHelper.saveData(
+            key: 'token',
+            value: state.shaorjahLoginModel.accessToken,
+          ).then((value) {
+            token = state.shaorjahLoginModel.accessToken!;
+            navigatorFinished(context, LayoutScreen());
+          });
+        }
+      }
+    });
+  }
+}
