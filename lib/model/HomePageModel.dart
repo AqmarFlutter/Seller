@@ -113,7 +113,7 @@ class Data {
   }
 }
 
-class DataModel {
+class DataModel{
   int? id;
   String? name;
   String? thumbnailImage;

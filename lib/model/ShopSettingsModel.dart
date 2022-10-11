@@ -32,7 +32,7 @@ class Data {
   int? userId;
   String? name;
   String? logo;
-  List<String>? sliders;
+  //List<String>? sliders;
   String? address;
   String? facebook;
   String? google;
@@ -45,7 +45,7 @@ class Data {
         this.userId,
         this.name,
         this.logo,
-        this.sliders,
+        //this.sliders,
         this.address,
         this.facebook,
         this.google,
@@ -58,7 +58,7 @@ class Data {
     userId = json['user_id'];
     name = json['name'];
     logo = json['logo'];
-    sliders = json['sliders'].cast<String>();
+    //sliders = json['sliders'] as List<String>;
     address = json['address'];
     facebook = json['facebook'];
     google = json['google'];
@@ -73,7 +73,7 @@ class Data {
     data['user_id'] = this.userId;
     data['name'] = this.name;
     data['logo'] = this.logo;
-    data['sliders'] = this.sliders;
+    //data['sliders'] = this.sliders;
     data['address'] = this.address;
     data['facebook'] = this.facebook;
     data['google'] = this.google;

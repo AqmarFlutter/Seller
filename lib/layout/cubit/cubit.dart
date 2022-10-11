@@ -75,7 +75,7 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
     });
   }
 
-  late ShopSettingsModel shopSettingsModel;
+  late Data shopSettingsModel;
   void getShopSettingData() {
     emit(SharojahLoadingGetShopSettingState());
     DioHelper.getData(
@@ -83,12 +83,10 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
       token: token,
     ).then((value) {
       print(token);
-      shopSettingsModel = ShopSettingsModel.fromJson(value.data);
-      value.data.forEach((element)
-      {
-        element.toString();
-      });
-      print('the password is ${shopSettingsModel.data}');
+      shopSettingsModel = Data.fromJson(value.data);
+      print(shopSettingsModel.userId);
+      print(value.data);
+      print('the password is ${shopSettingsModel.name}');
       emit(SharojahSuccessGetShopSettingState());
     }).catchError((error) {
       print(error.toString());
