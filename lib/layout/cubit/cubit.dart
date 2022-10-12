@@ -1,6 +1,8 @@
 // ignore_for_file: unnecessary_import
 import 'package:alshorjah_app/global_presentation/network/remote/dio_helper.dart';
 import 'package:alshorjah_app/layout/cubit/state.dart';
+import 'package:alshorjah_app/model/HomePageModel.dart';
+import 'package:alshorjah_app/model/ProfileModel.dart';
 import 'package:alshorjah_app/model/ShopSettingsModel.dart';
 import 'package:alshorjah_app/modules/setting/views/setting_screen.dart';
 import 'package:bloc/bloc.dart';
@@ -39,7 +41,7 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
 
   late ShaorjahLoginModel loginModel;
 
-  late User userData;
+  late ProfileModel userData;
 
   void userLogin({
     required String email,
@@ -56,41 +58,56 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
       loginModel = ShaorjahLoginModel.fromJson(value.data);
       emit(ShaorjahSuccessLogin(loginModel));
     }).catchError((error) {
-      print(error.toString());
       emit(ShaorjahErrorLogin(error.toString()));
     });
   }
 
-
   void getUserData() {
     emit(SharojahLoadingGetUserState());
     DioHelper.getData(
-      url: user,
+      url: profile,
       token: token,
     ).then((value) {
-      userData = User.fromJson(value.data);
+      userData = ProfileModel.fromJson(value.data);
+      print('hello');
       emit(SharojahSuccessGetUserState());
     }).catchError((error) {
       emit(SharojahErrorGetUserState(error));
     });
   }
 
-  late Data shopSettingsModel;
+  late ShopSettingsModel shopSettingsModel;
+
   void getShopSettingData() {
     emit(SharojahLoadingGetShopSettingState());
     DioHelper.getData(
       url: shopSettings,
       token: token,
     ).then((value) {
-      print(token);
-      shopSettingsModel = Data.fromJson(value.data);
-      print(shopSettingsModel.userId);
-      print(value.data);
-      print('the password is ${shopSettingsModel.name}');
+      shopSettingsModel = ShopSettingsModel.fromJson(value.data);
+      print(shopSettingsModel.data![0].name);
       emit(SharojahSuccessGetShopSettingState());
     }).catchError((error) {
-      print(error.toString());
       emit(SharojahErrorGetShopSettingState(error));
+    });
+  }
+
+
+  late DataModel homePageModel;
+
+  void getHomePageData() {
+    emit(SharojahLoadingGetHomePageState());
+    DioHelper.getData(
+      url: homePage,
+      token: token,
+    ).then((value) {
+      print(token);
+      homePageModel = DataModel.fromJson(value.data);
+      print(homePageModel.name);
+      emit(SharojahSuccessGetHomePageState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(SharojahErrorGetHomePageState(error));
     });
   }
 

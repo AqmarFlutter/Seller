@@ -23,7 +23,7 @@ class HomePageModel {
 
 class Data {
   HomePageModel? products;
-  List? last7DaysSales;
+  List<String>? last7DaysSales;
   int? reating;
   int? productsCount;
   int? ordersCount;
@@ -92,7 +92,7 @@ class Data {
     }
     if (this.last7DaysSales != null) {
       data['last_7_days_sales'] =
-          this.last7DaysSales!.map((v) => v!.toJson()).toList();
+          this.last7DaysSales!.map((v) => v.toString()).toList();
     }
     data['reating'] = this.reating;
     data['products_count'] = this.productsCount;
@@ -113,7 +113,7 @@ class Data {
   }
 }
 
-class DataModel{
+class DataModel {
   int? id;
   String? name;
   String? thumbnailImage;

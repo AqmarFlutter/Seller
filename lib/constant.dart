@@ -11,7 +11,11 @@ String login = '/auth/login';
 
 String user = '/get-user-by-access_token?access_token=$token';
 
-String shopSettings = '/shops/details/63?access_token=$token';
+String shopSettings = '/seller/shop/info';
+
+String homePage = '/seller/dashboard';
+
+String profile = '/seller/profile';
 
 String? token ='' ;
 

@@ -46,8 +46,19 @@ class SharojahLoadingGetShopSettingState extends AlshorjahStates {}
 
 class SharojahSuccessGetShopSettingState extends AlshorjahStates {}
 
-class SharojahErrorGetShopSettingState extends AlshorjahStates
-{
+class SharojahErrorGetShopSettingState extends AlshorjahStates {
   final String e;
   SharojahErrorGetShopSettingState(this.e);
+}
+
+
+
+
+class SharojahLoadingGetHomePageState extends AlshorjahStates {}
+
+class SharojahSuccessGetHomePageState extends AlshorjahStates {}
+
+class SharojahErrorGetHomePageState extends AlshorjahStates {
+  final String e;
+  SharojahErrorGetHomePageState(this.e);
 }

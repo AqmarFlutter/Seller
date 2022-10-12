@@ -28,8 +28,8 @@ class ShopSettingsModel {
 }
 
 class Data {
-  int? id;
-  int? userId;
+  dynamic id;
+  dynamic userId;
   String? name;
   String? logo;
   //List<String>? sliders;
@@ -37,8 +37,8 @@ class Data {
   String? facebook;
   String? google;
   String? twitter;
-  int? trueRating;
-  int? rating;
+  dynamic trueRating;
+  dynamic rating;
 
   Data(
       {this.id,
