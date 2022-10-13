@@ -6,16 +6,12 @@ import '../../../global_presentation/global_features/color_manager.dart';
 import '../../../global_presentation/global_features/font_manager.dart';
 
 class ProductWidget extends StatelessWidget {
+  String? title;
+  String? num;
+  String? image;
 
-   String? title;
-   String? num;
-   String? image;
-
-   ProductWidget({Key? key,
-     this.title,
-     this.image,
-     this.num
-  }) : super(key: key);
+  ProductWidget({Key? key, this.title, this.image, this.num, })
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +19,7 @@ class ProductWidget extends StatelessWidget {
       width: double.infinity,
       height: 130.h,
       color: Colors.blue[600],
-      child:Padding(
+      child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           children: [
@@ -33,24 +29,26 @@ class ProductWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title!,
+                  Text(
+                    title!,
                     style: TextStyle(
-                        color:  ColorManager.blue.withAlpha(200),
-                        fontSize: 15.sp
-                    ),
+                        color: ColorManager.blue.withAlpha(200),
+                        fontSize: 15.sp),
                   ),
-                  Text(num!,
+                  Text(
+                    '$num',
                     style: TextStyle(
-                        color: ColorManager.white,
-                        fontWeight: FontWeightManager.bold,
-                        fontSize: 25.sp
+                      color: ColorManager.white,
+                      fontWeight: FontWeightManager.bold,
+                      fontSize: 25.sp,
                     ),
                   ),
                 ],
               ),
             ),
             const Spacer(),
-            Image.asset(image!,
+            Image.asset(
+              image!,
               height: 60.sp,
               color: ColorManager.blue.withAlpha(100),
             ),

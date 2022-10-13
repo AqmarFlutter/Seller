@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 
 class DioHelper
 {
@@ -10,6 +11,8 @@ class DioHelper
       BaseOptions(
         baseUrl: 'https://dev.alshorjah.com/api/v2',
         receiveDataWhenStatusError: true,
+        followRedirects: false,
+        validateStatus: (status){return status! < 500;}
       ),
     );
   }
@@ -21,9 +24,8 @@ class DioHelper
   }) async
   {
     dio.options.headers = {
-      'Content-Type':'application/json',
-      'lang' : lang,
-      'Authorization' : token??'',
+      'Authorization' : 'Bearer $token',
+      'Accept':'application/json',
     };
     return await dio.get(
       url,
@@ -42,8 +44,8 @@ class DioHelper
 
     dio.options.headers = {
       'Content-Type':'application/json',
-      'lang' : lang,
-      'Authorization' : token,
+      'Accept':'application/json',
+      'Authorization' : 'Bearer $token',
     };
     return await dio.post(
       url,

@@ -7,8 +7,13 @@ import '../../../global_presentation/global_features/font_manager.dart';
 
 class OrderWidget extends StatelessWidget {
   const OrderWidget({
-    Key? key,
+    Key? key, required this.newOrder, required this.cancelled, required this.onDelivery, required this.delivery,
   }) : super(key: key);
+
+  final String newOrder;
+  final String cancelled;
+  final String onDelivery;
+  final String delivery;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +66,7 @@ class OrderWidget extends StatelessWidget {
                             fontWeight: FontWeightManager.medium),
                       ),
                       Text(
-                        '0',
+                        newOrder,
                         style: TextStyle(
                             color: ColorManager.buttonColor.withAlpha(200),
                             fontSize: 20.sp,
@@ -97,7 +102,7 @@ class OrderWidget extends StatelessWidget {
                             fontWeight: FontWeightManager.medium),
                       ),
                       Text(
-                        '0',
+                        cancelled,
                         style: TextStyle(
                             color: ColorManager.buttonColor.withAlpha(200),
                             fontSize: 20.sp,
@@ -133,7 +138,7 @@ class OrderWidget extends StatelessWidget {
                             fontWeight: FontWeightManager.medium),
                       ),
                       Text(
-                        '0',
+                        onDelivery,
                         style: TextStyle(
                             color: ColorManager.buttonColor.withAlpha(200),
                             fontSize: 20.sp,
@@ -162,14 +167,14 @@ class OrderWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Delivered',
+                        'Delivery',
                         style: TextStyle(
                             color: ColorManager.buttonColor.withAlpha(200),
                             fontSize: 15.sp,
                             fontWeight: FontWeightManager.medium),
                       ),
                       Text(
-                        '0',
+                        delivery,
                         style: TextStyle(
                             color: ColorManager.buttonColor.withAlpha(200),
                             fontSize: 20.sp,

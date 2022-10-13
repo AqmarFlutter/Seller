@@ -60,7 +60,7 @@ class SocialMediaWidget extends StatelessWidget {
                 GlobalTextField(
                   keyboardType: TextInputType.url,
                   controller: facebookController,
-                  //hintText: cubit.shopSettingsModel.facebook != null ? cubit.shopSettingsModel.facebook : 'Facebook',
+                  hintText: cubit.shopSettingsModel.facebook != null ? cubit.shopSettingsModel.facebook : 'Facebook',
                 ),
                 SizedBox(
                   height: 15.h,
@@ -109,7 +109,7 @@ class SocialMediaWidget extends StatelessWidget {
                 GlobalTextField(
                   keyboardType: TextInputType.url,
                   controller: twitterController,
-                  //hintText: cubit.shopSettingsModel.twitter != null ? cubit.shopSettingsModel.twitter : 'Twitter',
+                  hintText: cubit.shopSettingsModel.twitter != null ? cubit.shopSettingsModel.twitter : 'Twitter',
                 ),
                 SizedBox(
                   height: 3.h,
@@ -138,7 +138,7 @@ class SocialMediaWidget extends StatelessWidget {
                 GlobalTextField(
                   keyboardType: TextInputType.url,
                   controller: googleController,
-                  //hintText: cubit.shopSettingsModel.google != null ? cubit.shopSettingsModel.google : 'Google',
+                  hintText: cubit.shopSettingsModel.google != null ? cubit.shopSettingsModel.google : 'Google',
                 ),
                 SizedBox(
                   height: 3.h,

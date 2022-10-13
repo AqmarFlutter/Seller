@@ -7,6 +7,11 @@ import 'global_presentation/network/local/cache.dart';
 
 String login = '/auth/login';
 
+
+
+
+String UpdateProfile = '/profile/update?name=.&phone=&new_password=&confirm_password=&photo=&cash_on_delivery_status=&bank_payment_status=&bank_name&bank_acc_name&bank_acc_no=&bank_routing_no=';
+
 // String register = '/auth/signup';
 
 String user = '/get-user-by-access_token?access_token=$token';
@@ -14,6 +19,8 @@ String user = '/get-user-by-access_token?access_token=$token';
 String shopSettings = '/seller/shop/info';
 
 String homePage = '/seller/dashboard';
+
+String product = '/seller/dashboard/top-12-product';
 
 String profile = '/seller/profile';
 

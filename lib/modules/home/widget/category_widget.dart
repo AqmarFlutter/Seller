@@ -8,7 +8,12 @@ import '../../../global_presentation/global_widgets/dash_divider_item.dart';
 
 class CategoryWidget extends StatelessWidget {
 
-  const CategoryWidget({Key? key,}) : super(key: key);
+  const CategoryWidget({Key? key, required this.name, required this.count, required this.name2, required this.count2,}) : super(key: key);
+
+  final String? name;
+  final int? count;
+  final String? name2;
+  final int? count2;
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +40,12 @@ class CategoryWidget extends StatelessWidget {
               ),
               Row(
                children: [
-                 Text('Men Clothing & Fashion',
+                 Text(name!,
                    style: TextStyle(
                        color: ColorManager.buttonColor.withAlpha(200), fontSize: 13.sp),
                  ),
                  const Spacer(),
-                 Text('2',style: TextStyle(color: ColorManager.buttonColor.withAlpha(200)),),
+                 Text('$count',style: TextStyle(color: ColorManager.buttonColor.withAlpha(200)),),
                ],
              ),
               SizedBox(
@@ -48,12 +53,12 @@ class CategoryWidget extends StatelessWidget {
               ),
               Row(
                children: [
-                 Text('Dresses',
+                 Text(name2!,
                    style: TextStyle(
                        color: ColorManager.buttonColor.withAlpha(200), fontSize: 13.sp),
                  ),
                  const Spacer(),
-                 Text('1',style: TextStyle(color: ColorManager.buttonColor.withAlpha(200)),),
+                 Text('$count2',style: TextStyle(color: ColorManager.buttonColor.withAlpha(200)),),
                ],
              ),
             ],

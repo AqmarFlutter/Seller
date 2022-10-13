@@ -1,9 +1,10 @@
-// ignore_for_file: unnecessary_import
 import 'package:alshorjah_app/global_presentation/network/remote/dio_helper.dart';
 import 'package:alshorjah_app/layout/cubit/state.dart';
-import 'package:alshorjah_app/model/HomePageModel.dart';
+import 'package:alshorjah_app/model/HomeModel/HomePageModel.dart';
+import 'package:alshorjah_app/model/HomeModel/Top12ProductModel.dart';
 import 'package:alshorjah_app/model/ProfileModel.dart';
 import 'package:alshorjah_app/model/ShopSettingsModel.dart';
+import 'package:alshorjah_app/model/Update_Profile.dart';
 import 'package:alshorjah_app/modules/setting/views/setting_screen.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
@@ -62,6 +63,63 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
     });
   }
 
+
+
+
+  var nameController = TextEditingController();
+  var phoneController = TextEditingController();
+  var newPasswordController = TextEditingController();
+  var confirmPasswordController = TextEditingController();
+
+  bool cashStatus = false;
+  bool bankStatus = false;
+
+  var bankNameController = TextEditingController();
+
+  var bankAccountNameController = TextEditingController();
+
+  var bankAccountNumberController = TextEditingController();
+
+  var bankRoutingNumberController = TextEditingController();
+  late UpdateProfileModel updateProfileModel;
+  void updateProfile({
+    required String name,
+    required String phone,
+    required String password,
+    required String confirmPassword,
+    //required String photo,
+    required bool cashPayment,
+    required bool bankPayment,
+    required String bankName,
+    required String bankAccountName,
+    required String bankAccountNumber,
+    required String bankRoutingNumber,
+  }) {
+    emit(ShaorjahLoadingUpdateProfile());
+    DioHelper.postData(
+      url: UpdateProfile,
+      token: token,
+      data: {
+        'name': name,
+        'phone': phone,
+        'new_password': password,
+        'confirm_password': confirmPassword,
+        'cash_on_delivery_status': cashPayment,
+        'bank_payment_status': bankPayment,
+        'bank_name': bankName,
+        'bank_acc_name': bankAccountName,
+        'bank_acc_no': bankAccountNumber,
+        'bank_routing_no': bankRoutingNumber,
+      },
+    ).then((value) {
+      updateProfileModel = UpdateProfileModel.fromJson(value.data);
+      print(updateProfileModel.result);
+      emit(ShaorjahSuccessUpdateProfile(updateProfileModel));
+    }).catchError((error) {
+      emit(ShaorjahErrorUpdateProfile(error.toString()));
+    });
+  }
+
   void getUserData() {
     emit(SharojahLoadingGetUserState());
     DioHelper.getData(
@@ -69,14 +127,13 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
       token: token,
     ).then((value) {
       userData = ProfileModel.fromJson(value.data);
-      print('hello');
       emit(SharojahSuccessGetUserState());
     }).catchError((error) {
       emit(SharojahErrorGetUserState(error));
     });
   }
 
-  late ShopSettingsModel shopSettingsModel;
+  late ShopInfoModel shopSettingsModel;
 
   void getShopSettingData() {
     emit(SharojahLoadingGetShopSettingState());
@@ -84,16 +141,14 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
       url: shopSettings,
       token: token,
     ).then((value) {
-      shopSettingsModel = ShopSettingsModel.fromJson(value.data);
-      print(shopSettingsModel.data![0].name);
+      shopSettingsModel = ShopInfoModel.fromJson(value.data);
       emit(SharojahSuccessGetShopSettingState());
     }).catchError((error) {
       emit(SharojahErrorGetShopSettingState(error));
     });
   }
 
-
-  late DataModel homePageModel;
+  late HomePageModel homePageModel;
 
   void getHomePageData() {
     emit(SharojahLoadingGetHomePageState());
@@ -101,12 +156,22 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
       url: homePage,
       token: token,
     ).then((value) {
-      print(token);
-      homePageModel = DataModel.fromJson(value.data);
-      print(homePageModel.name);
+      homePageModel = HomePageModel.fromJson(value.data);
       emit(SharojahSuccessGetHomePageState());
     }).catchError((error) {
-      print(error.toString());
+      emit(SharojahErrorGetHomePageState(error));
+    });
+  }
+
+  late Top12ProductModel model;
+  void getProductData() {
+    emit(SharojahLoadingGetHomePageState());
+    DioHelper.getData(
+      url: product,
+      token: token,
+    ).then((value) {
+      model = Top12ProductModel.fromJson(value.data);
+    }).catchError((error) {
       emit(SharojahErrorGetHomePageState(error));
     });
   }

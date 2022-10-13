@@ -1,5 +1,6 @@
 import 'package:alshorjah_app/model/ShaorjahLoginModel.dart';
 import 'package:alshorjah_app/model/ShaorjahRegisterModel.dart';
+import 'package:alshorjah_app/model/Update_Profile.dart';
 
 abstract class AlshorjahStates{}
 
@@ -17,14 +18,12 @@ class ShaorjahChangeTextFormFieldState extends  AlshorjahStates{}
 
 class ShaorjahLoadingLogin extends  AlshorjahStates{}
 
-class ShaorjahSuccessLogin extends  AlshorjahStates
-{
+class ShaorjahSuccessLogin extends  AlshorjahStates {
   final ShaorjahLoginModel shaorjahLoginModel;
   ShaorjahSuccessLogin(this.shaorjahLoginModel);
 }
 
-class ShaorjahErrorLogin extends  AlshorjahStates
-{
+class ShaorjahErrorLogin extends  AlshorjahStates {
   final String error;
   ShaorjahErrorLogin(this.error);
 }
@@ -61,4 +60,17 @@ class SharojahSuccessGetHomePageState extends AlshorjahStates {}
 class SharojahErrorGetHomePageState extends AlshorjahStates {
   final String e;
   SharojahErrorGetHomePageState(this.e);
+}
+
+
+class ShaorjahLoadingUpdateProfile extends  AlshorjahStates{}
+
+class ShaorjahSuccessUpdateProfile extends  AlshorjahStates {
+  final UpdateProfileModel shaorjahLoginModel;
+  ShaorjahSuccessUpdateProfile(this.shaorjahLoginModel);
+}
+
+class ShaorjahErrorUpdateProfile extends  AlshorjahStates {
+  final String error;
+  ShaorjahErrorUpdateProfile(this.error);
 }

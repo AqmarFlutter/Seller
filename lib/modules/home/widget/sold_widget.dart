@@ -7,8 +7,10 @@ import '../../../global_presentation/global_features/font_manager.dart';
 
 class SoldWidget extends StatelessWidget {
 
-  const SoldWidget({Key? key,}) : super(key: key);
+  const SoldWidget({required this.currentMonth,Key? key, required this.lastMonth,}) : super(key: key);
 
+  final String currentMonth;
+  final String lastMonth;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,14 +34,14 @@ class SoldWidget extends StatelessWidget {
               SizedBox(
                 height: 15.h,
               ),
-              Text('\$250.0',
+              Text('$currentMonth',
                 style: TextStyle(
                     color: ColorManager.buttonColor.withAlpha(200), fontSize: 28.sp,fontWeight: FontWeightManager.bold),
               ),
               SizedBox(
                 height: 15.h,
               ),
-              const Text('Last Month :\$0.0'),
+              Text('Last Month :$lastMonth'),
             ],
           ),
         ));

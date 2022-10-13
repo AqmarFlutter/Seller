@@ -6,8 +6,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final String? title;
 
+  final Widget? leading;
+
   const CustomAppBar({
     this.title,
+    this.leading,
     Key? key,
   }) : super(key: key);
 
@@ -24,6 +27,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             fontWeight: FontWeightManager.bold
         ) ,
       ),
+        leading: leading,
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 1.0,

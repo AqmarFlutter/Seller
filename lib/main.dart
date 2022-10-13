@@ -16,8 +16,7 @@ void main() async {
   DioHelper.init();
   await CacheHelper.init();
 
-
-  token = CacheHelper.getData(key: 'token') ;
+  token = CacheHelper.getData(key: 'token');
   //print(token);
 
   runApp(const MyApp());
@@ -34,34 +33,39 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       useInheritedMediaQuery: true,
-      builder: (BuildContext context, Widget? child) =>
-          MultiBlocProvider(
-            providers: [
-              BlocProvider(create: (BuildContext context) => AlshorjahCubit()..getUserData()..getShopSettingData())
-            ],
-            child: BlocConsumer<AlshorjahCubit, AlshorjahStates>(
-              listener: (context, state) {},
-              builder: (context, state) {
-                return MaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  home: SplashScreenView(
-                    navigateRoute: token != null ? LayoutScreen() : LoginScreen(),
-                    duration: 4000,
-                    imageSize: 200,
-                    imageSrc: "assets/images/splash.png",
-                    text: "Alshorjah",
-                    textType: TextType.NormalText,
-                    textStyle: const TextStyle(
-                      fontSize: 40.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                    backgroundColor: Colors.white,
-                  ),
-                );
-              },
-            ),
+      builder: (BuildContext context, Widget? child) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (BuildContext context) => AlshorjahCubit()
+              ..getUserData()
+              ..getShopSettingData()
+              ..getHomePageData()
+              ..getProductData(),
           ),
+        ],
+        child: BlocConsumer<AlshorjahCubit, AlshorjahStates>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: SplashScreenView(
+                navigateRoute: token != null ? LayoutScreen() : LoginScreen(),
+                duration: 4000,
+                imageSize: 200,
+                imageSrc: "assets/images/splash.png",
+                text: "Alshorjah",
+                textType: TextType.NormalText,
+                textStyle: const TextStyle(
+                  fontSize: 40.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+                backgroundColor: Colors.white,
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

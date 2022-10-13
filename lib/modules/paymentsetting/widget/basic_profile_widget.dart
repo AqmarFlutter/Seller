@@ -11,10 +11,7 @@ import '../../../global_presentation/global_widgets/primary_textfield.dart';
 import '../../../layout/cubit/cubit.dart';
 
 class BasicProfileWidget extends StatelessWidget {
-  var nameController = TextEditingController();
-  var phoneController = TextEditingController();
-  var newPasswordController = TextEditingController();
-  var confirmPasswordController = TextEditingController();
+
 
   BasicProfileWidget({Key? key}) : super(key: key);
 
@@ -59,7 +56,7 @@ class BasicProfileWidget extends StatelessWidget {
               ),
               GlobalTextField(
                 keyboardType: TextInputType.name,
-                controller: nameController,
+                controller: cubit.nameController,
                 hintText: cubit.userData.name,
               ),
               SizedBox(
@@ -79,7 +76,7 @@ class BasicProfileWidget extends StatelessWidget {
               ),
               GlobalTextField(
                 keyboardType: TextInputType.phone,
-                controller: phoneController,
+                controller: cubit.phoneController,
                 hintText: cubit.userData.email,
               ),
               SizedBox(
@@ -154,7 +151,7 @@ class BasicProfileWidget extends StatelessWidget {
               GlobalTextField(
                 keyboardType: TextInputType.name,
                 obscureText: true,
-                controller: newPasswordController,
+                controller: cubit.newPasswordController,
                 hintText: 'New Password',
               ),
               SizedBox(
@@ -174,7 +171,7 @@ class BasicProfileWidget extends StatelessWidget {
               ),
               GlobalTextField(
                 keyboardType: TextInputType.name,
-                controller: confirmPasswordController,
+                controller: cubit.confirmPasswordController,
                 hintText: 'Confirm Password',
               ),
             ],

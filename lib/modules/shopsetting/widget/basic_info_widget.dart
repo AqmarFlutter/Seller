@@ -61,7 +61,7 @@ class BasicInfoWidget extends StatelessWidget {
                 GlobalTextField(
                   keyboardType: TextInputType.name,
                   controller: nameController,
-                  hintText: cubit.shopSettingsModel.data![0].name,
+                  hintText: cubit.shopSettingsModel.name,
                 ),
                 SizedBox(
                   height: 15.h,
@@ -155,7 +155,7 @@ class BasicInfoWidget extends StatelessWidget {
                 GlobalTextField(
                   keyboardType: TextInputType.name,
                   controller: addressController,
-                  hintText: cubit.shopSettingsModel.data![0].address,
+                  hintText: cubit.shopSettingsModel.address != null ? cubit.shopSettingsModel.address : 'Address',
                 ),
                 SizedBox(
                   height: 15.h,

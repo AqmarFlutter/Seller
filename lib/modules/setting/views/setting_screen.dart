@@ -68,33 +68,10 @@ class SettingScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const NotificationScreen()));
-              },
-              child: const SettingWidget(
-                title: 'Notifications',
-              ),
-            ),
-            SizedBox(
-              height: 25.h,
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
                         builder: (context) => const ShopSettingScreen()));
               },
               child: const SettingWidget(
                 title: 'Shop Settings',
-              ),
-            ),
-            SizedBox(
-              height: 25.h,
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: const SettingWidget(
-                title: 'About Us',
               ),
             ),
             SizedBox(
