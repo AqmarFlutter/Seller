@@ -66,11 +66,37 @@ class SharojahErrorGetHomePageState extends AlshorjahStates {
 class ShaorjahLoadingUpdateProfile extends  AlshorjahStates{}
 
 class ShaorjahSuccessUpdateProfile extends  AlshorjahStates {
-  final UpdateProfileModel shaorjahLoginModel;
-  ShaorjahSuccessUpdateProfile(this.shaorjahLoginModel);
+  final UpdateProfileModel updateProfileModel;
+  ShaorjahSuccessUpdateProfile(this.updateProfileModel);
 }
 
 class ShaorjahErrorUpdateProfile extends  AlshorjahStates {
   final String error;
   ShaorjahErrorUpdateProfile(this.error);
+}
+
+
+class ShaorjahLoadingUpdateShop extends  AlshorjahStates{}
+
+class ShaorjahSuccessUpdateShop extends  AlshorjahStates {
+  final UpdateProfileModel updateShop;
+  ShaorjahSuccessUpdateShop(this.updateShop);
+}
+
+class ShaorjahErrorUpdateShop extends  AlshorjahStates {
+  final String error;
+  ShaorjahErrorUpdateShop(this.error);
+}
+
+
+class ShaorjahLoadingUpdateShopSocial extends  AlshorjahStates{}
+
+class ShaorjahSuccessUpdateShopSocial extends  AlshorjahStates {
+  final UpdateProfileModel updateShopSocial;
+  ShaorjahSuccessUpdateShopSocial(this.updateShopSocial);
+}
+
+class ShaorjahErrorUpdateShopSocial extends  AlshorjahStates {
+  final String error;
+  ShaorjahErrorUpdateShopSocial(this.error);
 }

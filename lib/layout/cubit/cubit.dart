@@ -109,7 +109,6 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
       },
     ).then((value) {
       updateProfileModel = UpdateProfileModel.fromJson(value.data);
-      print(updateProfileModel.result);
       emit(ShaorjahSuccessUpdateProfile(updateProfileModel));
     }).catchError((error) {
       emit(ShaorjahErrorUpdateProfile(error.toString()));
@@ -122,6 +121,7 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
   var addressShopController = TextEditingController();
   var metaShopController = TextEditingController();
   var descriptionShopController = TextEditingController();
+  late UpdateProfileModel _updateProfileModel;
 
   void updateShopBasic({
     required String name,
@@ -130,9 +130,9 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
     required String metaShop,
     required String descriptionShop,
   }) {
-    emit(ShaorjahLoadingUpdateProfile());
+    emit(ShaorjahLoadingUpdateShop());
     DioHelper.postData(
-      url: UpdateProfile,
+      url: updateShop,
       token: token,
       data: {
         'name': name,
@@ -142,11 +142,44 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
         'address': address,
       },
     ).then((value) {
-      updateProfileModel = UpdateProfileModel.fromJson(value.data);
-      print(updateProfileModel.result);
-      emit(ShaorjahSuccessUpdateProfile(updateProfileModel));
+      _updateProfileModel = UpdateProfileModel.fromJson(value.data);
+      emit(ShaorjahSuccessUpdateShop(_updateProfileModel));
     }).catchError((error) {
-      emit(ShaorjahErrorUpdateProfile(error.toString()));
+      emit(ShaorjahErrorUpdateShop(error.toString()));
+    });
+  }
+
+  var facebookController = TextEditingController();
+  var instagramController = TextEditingController();
+  var twitterController = TextEditingController();
+  var googleController = TextEditingController();
+  var youtubeController = TextEditingController();
+
+  late UpdateProfileModel _updateShopSocial;
+  void updateShopSocial({
+    required String facebook,
+    required String instagram,
+    required String youtube,
+    required String google,
+    required String twitter,
+  }) {
+    emit(ShaorjahLoadingUpdateShopSocial());
+    DioHelper.postData(
+      url: updateShopSocials,
+      token: token,
+      data: {
+        'facebook': facebook,
+        'instagram': instagram,
+        'google': google,
+        'twitter': twitter,
+        'youtube': youtube,
+      },
+    ).then((value) {
+      _updateShopSocial = UpdateProfileModel.fromJson(value.data);
+      print(_updateShopSocial.result);
+      emit(ShaorjahSuccessUpdateShopSocial(_updateShopSocial));
+    }).catchError((error) {
+      emit(ShaorjahErrorUpdateShopSocial(error.toString()));
     });
   }
 

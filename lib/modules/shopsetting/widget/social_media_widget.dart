@@ -11,17 +11,11 @@ import '../../../global_presentation/global_widgets/dash_divider_item.dart';
 import '../../../global_presentation/global_widgets/primary_textfield.dart';
 
 class SocialMediaWidget extends StatelessWidget {
-  var facebookController = TextEditingController();
-  var instagramController = TextEditingController();
-  var twitterController = TextEditingController();
-  var googleController = TextEditingController();
-  var youtubeController = TextEditingController();
-
   SocialMediaWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AlshorjahCubit,AlshorjahStates>(
+    return BlocConsumer<AlshorjahCubit, AlshorjahStates>(
         builder: (context, state) {
           var cubit = AlshorjahCubit.get(context);
           return Container(
@@ -59,8 +53,10 @@ class SocialMediaWidget extends StatelessWidget {
                 ),
                 GlobalTextField(
                   keyboardType: TextInputType.url,
-                  controller: facebookController,
-                  hintText: cubit.shopSettingsModel.facebook != null ? cubit.shopSettingsModel.facebook : 'Facebook',
+                  controller: cubit.facebookController,
+                  hintText: cubit.shopSettingsModel.facebook != null
+                      ? cubit.shopSettingsModel.facebook
+                      : 'Facebook',
                 ),
                 SizedBox(
                   height: 15.h,
@@ -79,8 +75,10 @@ class SocialMediaWidget extends StatelessWidget {
                 ),
                 GlobalTextField(
                   keyboardType: TextInputType.url,
-                  controller: instagramController,
-                  hintText: 'Instagram',
+                  controller: cubit.instagramController,
+                  hintText: cubit.shopSettingsModel.instagram != null
+                      ? cubit.shopSettingsModel.instagram
+                      : 'Instagram',
                 ),
                 SizedBox(
                   height: 3.h,
@@ -108,8 +106,10 @@ class SocialMediaWidget extends StatelessWidget {
                 ),
                 GlobalTextField(
                   keyboardType: TextInputType.url,
-                  controller: twitterController,
-                  hintText: cubit.shopSettingsModel.twitter != null ? cubit.shopSettingsModel.twitter : 'Twitter',
+                  controller: cubit.twitterController,
+                  hintText: cubit.shopSettingsModel.twitter != null
+                      ? cubit.shopSettingsModel.twitter
+                      : 'Twitter',
                 ),
                 SizedBox(
                   height: 3.h,
@@ -137,8 +137,10 @@ class SocialMediaWidget extends StatelessWidget {
                 ),
                 GlobalTextField(
                   keyboardType: TextInputType.url,
-                  controller: googleController,
-                  hintText: cubit.shopSettingsModel.google != null ? cubit.shopSettingsModel.google : 'Google',
+                  controller: cubit.googleController,
+                  hintText: cubit.shopSettingsModel.google != null
+                      ? cubit.shopSettingsModel.google
+                      : 'Google',
                 ),
                 SizedBox(
                   height: 3.h,
@@ -166,8 +168,10 @@ class SocialMediaWidget extends StatelessWidget {
                 ),
                 GlobalTextField(
                   keyboardType: TextInputType.url,
-                  controller: youtubeController,
-                  hintText: 'Youtube',
+                  controller: cubit.youtubeController,
+                  hintText: cubit.shopSettingsModel.youtube != null
+                      ? cubit.shopSettingsModel.youtube
+                      : 'Youtube',
                 ),
                 SizedBox(
                   height: 3.h,
@@ -190,7 +194,15 @@ class SocialMediaWidget extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            cubit.updateShopSocial(
+                              facebook: cubit.facebookController.text,
+                              instagram: cubit.instagramController.text,
+                              youtube: cubit.youtubeController.text,
+                              google: cubit.googleController.text,
+                              twitter: cubit.twitterController.text,
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.blue,
                             shape: RoundedRectangleBorder(
