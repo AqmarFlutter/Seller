@@ -65,13 +65,17 @@ class PaymentSettingScreen extends StatelessWidget {
                               name: cubit.nameController.text,
                               phone: cubit.phoneController.text,
                               password: cubit.newPasswordController.text,
-                              confirmPassword: cubit.confirmPasswordController.text,
+                              confirmPassword:
+                                  cubit.confirmPasswordController.text,
                               cashPayment: cubit.cashStatus,
                               bankPayment: cubit.bankStatus,
                               bankName: cubit.bankNameController.text,
-                              bankAccountName: cubit.bankAccountNameController.text,
-                              bankAccountNumber: cubit.bankAccountNumberController.text,
-                              bankRoutingNumber: cubit.bankRoutingNumberController.text,
+                              bankAccountName:
+                                  cubit.bankAccountNameController.text,
+                              bankAccountNumber:
+                                  cubit.bankAccountNumberController.text,
+                              bankRoutingNumber:
+                                  cubit.bankRoutingNumberController.text,
                             );
                           },
                           style: ElevatedButton.styleFrom(

@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
         int? orderCount = cubit.homePageModel.data![0].ordersCount;
         int? rating = cubit.homePageModel.data![0].reating;
         return BuildCondition(
-          condition: cubit.model != null && cubit.homePageModel != null,
+          condition: cubit.model != null,
           builder: (context) => Scaffold(
             body: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     ProductWidget(
                       title: 'Product',
-                      num: productsCount.toString(),
+                      num: productsCount.toString() ,
                       image: 'assets/images/product.png',
                     ),
                     SizedBox(
@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     ProductWidget(
                       title: 'Rating',
-                      num: rating.toString(),
+                      num: rating.toString() ,
                       image: 'assets/images/star.png',
                     ),
                     SizedBox(
@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     ProductWidget(
                       title: 'Total Sales',
-                      num: cubit.homePageModel.data![0].totalSales,
+                      num: cubit.homePageModel.data![0].totalSales ?? 0.toString(),
                       image: 'assets/images/sales.png',
                     ),
                     SizedBox(

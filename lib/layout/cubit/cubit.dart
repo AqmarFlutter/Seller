@@ -70,24 +70,20 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
   var phoneController = TextEditingController();
   var newPasswordController = TextEditingController();
   var confirmPasswordController = TextEditingController();
+  var bankNameController = TextEditingController();
+  var bankAccountNameController = TextEditingController();
+  var bankAccountNumberController = TextEditingController();
+  var bankRoutingNumberController = TextEditingController();
 
   bool cashStatus = false;
   bool bankStatus = false;
 
-  var bankNameController = TextEditingController();
-
-  var bankAccountNameController = TextEditingController();
-
-  var bankAccountNumberController = TextEditingController();
-
-  var bankRoutingNumberController = TextEditingController();
   late UpdateProfileModel updateProfileModel;
   void updateProfile({
     required String name,
     required String phone,
     required String password,
     required String confirmPassword,
-    //required String photo,
     required bool cashPayment,
     required bool bankPayment,
     required String bankName,
@@ -110,6 +106,40 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
         'bank_acc_name': bankAccountName,
         'bank_acc_no': bankAccountNumber,
         'bank_routing_no': bankRoutingNumber,
+      },
+    ).then((value) {
+      updateProfileModel = UpdateProfileModel.fromJson(value.data);
+      print(updateProfileModel.result);
+      emit(ShaorjahSuccessUpdateProfile(updateProfileModel));
+    }).catchError((error) {
+      emit(ShaorjahErrorUpdateProfile(error.toString()));
+    });
+  }
+
+
+  var nameShopController = TextEditingController();
+  var phoneShopController = TextEditingController();
+  var addressShopController = TextEditingController();
+  var metaShopController = TextEditingController();
+  var descriptionShopController = TextEditingController();
+
+  void updateShopBasic({
+    required String name,
+    required String phone,
+    required String address,
+    required String metaShop,
+    required String descriptionShop,
+  }) {
+    emit(ShaorjahLoadingUpdateProfile());
+    DioHelper.postData(
+      url: UpdateProfile,
+      token: token,
+      data: {
+        'name': name,
+        'phone': phone,
+        'meta_title': metaShop,
+        'meta_description': descriptionShop,
+        'address': address,
       },
     ).then((value) {
       updateProfileModel = UpdateProfileModel.fromJson(value.data);

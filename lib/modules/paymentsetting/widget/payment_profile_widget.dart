@@ -130,7 +130,7 @@ class _PaymentProfileWidgetState extends State<PaymentProfileWidget> {
               GlobalTextField(
                 keyboardType: TextInputType.name,
                 controller: cubit.bankNameController,
-                hintText: 'Bank Name',
+                hintText: cubit.userData.bankName,
               ),
               SizedBox(
                 height: 15.h,
@@ -150,7 +150,7 @@ class _PaymentProfileWidgetState extends State<PaymentProfileWidget> {
               GlobalTextField(
                 keyboardType: TextInputType.name,
                 controller: cubit.bankAccountNameController,
-                hintText: 'Bank Account Name',
+                hintText: cubit.userData.bankAccName,
               ),
               SizedBox(
                 height: 15.h,
@@ -170,7 +170,7 @@ class _PaymentProfileWidgetState extends State<PaymentProfileWidget> {
               GlobalTextField(
                 keyboardType: TextInputType.number,
                 controller: cubit.bankAccountNumberController,
-                hintText: 'Bank Account Number',
+                hintText: cubit.userData.bankAccNo,
               ),
               SizedBox(
                 height: 15.h,
@@ -190,7 +190,7 @@ class _PaymentProfileWidgetState extends State<PaymentProfileWidget> {
               GlobalTextField(
                 keyboardType: TextInputType.number,
                 controller: cubit.bankRoutingNumberController,
-                hintText: 'Bank Routing Number',
+                hintText: cubit.userData.bankRoutingNo.toString(),
               ),
             ],
           ),
