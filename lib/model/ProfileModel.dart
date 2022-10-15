@@ -4,9 +4,9 @@ class ProfileModel {
   String? type;
   String? name;
   String? email;
-  Null? avatar;
-  Null? avatarOriginal;
-  Null? phone;
+  String? avatar;
+  String? avatarOriginal;
+  String? phone;
   int? cashOnDeliveryStatus;
   int? bankPaymentStatus;
   String? bankName;
@@ -14,10 +14,10 @@ class ProfileModel {
   String? bankAccNo;
   int? bankRoutingNo;
   Addresses? addresses;
-  Null? address;
-  Null? facebook;
-  Null? google;
-  Null? twitter;
+  String? address;
+  String? facebook;
+  String? google;
+  String? twitter;
   int? trueRating;
   int? rating;
 

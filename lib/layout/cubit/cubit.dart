@@ -373,32 +373,6 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
     });
   }
 
-  // void userRegister({
-  //   required String emailOrPhone,
-  //   required String name,
-  //   required String password,
-  //   required String confirmPassword,
-  // })
-  // {
-  //   emit(ShaorjahLoadingRegister());
-  //   DioHelper.postData(
-  //     url: register,
-  //     data: {
-  //       'name' : name,
-  //       'email' : emailOrPhone,
-  //       'password' : password,
-  //       'passowrd_confirmation' : confirmPassword,
-  //     },
-  //   ).then((value) {
-  //     registerModel = ShaorjahRegisterModel.fromJson(value.data);
-  //     emit(ShaorjahSuccessRegister(registerModel));
-  //   }).catchError((error)
-  //   {
-  //     print(error.toString());
-  //     emit(ShaorjahErrorRegister(error.toString()));
-  //   });
-  // }
-
   void changeCurrentIndex(int index) {
     selectedIndex = index;
     emit(AlshorjahChangeBottomNavState());
