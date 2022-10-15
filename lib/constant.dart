@@ -31,6 +31,8 @@ String product = '/seller/dashboard/top-12-product';
 
 String profile = '/seller/profile';
 
+String language = '/languages';
+
 String? token ='' ;
 
 

@@ -3,6 +3,7 @@ import 'package:alshorjah_app/global_presentation/network/remote/dio_helper.dart
 import 'package:alshorjah_app/layout/cubit/state.dart';
 import 'package:alshorjah_app/model/HomeModel/HomePageModel.dart';
 import 'package:alshorjah_app/model/HomeModel/Top12ProductModel.dart';
+import 'package:alshorjah_app/model/LanguageModel.dart';
 import 'package:alshorjah_app/model/NotificationModel.dart';
 import 'package:alshorjah_app/model/ProfileModel.dart';
 import 'package:alshorjah_app/model/ShopSettingsModel.dart';
@@ -295,6 +296,21 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
       emit(SharojahSuccessGetUserState());
     }).catchError((error) {
       emit(SharojahErrorGetUserState(error));
+    });
+  }
+
+  late LanguageModel languageModel;
+  void getLanguage() {
+    emit(SharojahLoadingGetLanguageState());
+    DioHelper.getData(
+      url: language,
+      token: token,
+    ).then((value) {
+      languageModel = LanguageModel.fromJson(value.data);
+      print(languageModel.success);
+      emit(SharojahSuccessGetLanguageState());
+    }).catchError((error) {
+      emit(SharojahErrorGetLanguageState(error));
     });
   }
 

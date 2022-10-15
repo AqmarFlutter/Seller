@@ -120,3 +120,13 @@ class SharojahErrorGetWithdrawState extends AlshorjahStates {
   final String e;
   SharojahErrorGetWithdrawState(this.e);
 }
+
+
+class SharojahLoadingGetLanguageState extends AlshorjahStates {}
+
+class SharojahSuccessGetLanguageState extends AlshorjahStates {}
+
+class SharojahErrorGetLanguageState extends AlshorjahStates {
+  final String e;
+  SharojahErrorGetLanguageState(this.e);
+}

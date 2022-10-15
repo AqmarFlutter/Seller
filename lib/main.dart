@@ -42,7 +42,8 @@ class MyApp extends StatelessWidget {
               ..getHomePageData()
               ..getProductData()
               ..getNotification()
-              ..getWithdraw(),
+              ..getWithdraw()
+              ..getLanguage(),
           ),
         ],
         child: BlocConsumer<AlshorjahCubit, AlshorjahStates>(
