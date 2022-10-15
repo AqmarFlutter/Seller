@@ -19,8 +19,11 @@ String user = '/get-user-by-access_token?access_token=$token';
 String shopSettings = '/seller/shop/info';
 
 String notification = '/seller/all-notification';
+String withdraw = '/seller/withdraw-request';
 
 String updateShop = '/seller/shop-update';
+
+String requestWithdraws = '/seller/withdraw-request/store?amount=&message=';
 
 String homePage = '/seller/dashboard';
 

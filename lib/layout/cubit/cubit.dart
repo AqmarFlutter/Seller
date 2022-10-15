@@ -1,3 +1,4 @@
+import 'package:alshorjah_app/global_presentation/global_widgets/primary_textfield.dart';
 import 'package:alshorjah_app/global_presentation/network/remote/dio_helper.dart';
 import 'package:alshorjah_app/layout/cubit/state.dart';
 import 'package:alshorjah_app/model/HomeModel/HomePageModel.dart';
@@ -6,6 +7,7 @@ import 'package:alshorjah_app/model/NotificationModel.dart';
 import 'package:alshorjah_app/model/ProfileModel.dart';
 import 'package:alshorjah_app/model/ShopSettingsModel.dart';
 import 'package:alshorjah_app/model/Update_Profile.dart';
+import 'package:alshorjah_app/model/WithdrawModel.dart';
 import 'package:alshorjah_app/modules/setting/views/setting_screen.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
@@ -65,20 +67,85 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
     });
   }
 
-  void openDialog()
-  {
-    Dialog(
-      child: Container(
-        height: 70.h,
-        width: double.infinity,
-        color: Colors.red,
-      ),
-      backgroundColor: Colors.red,
-    );
-    emit(ShowDialogState());
+  var amountController = TextEditingController();
+  var messageController = TextEditingController();
+
+  Widget? openDialog(context) {
+    if (withdrawModel.meta!.total == 0) {
+      return Dialog(
+        child: Container(
+          height: 150.h,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    const Text('Send A Withdraw Request'),
+                    const Spacer(),
+                    IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        icon: Icon(Icons.cancel))
+                  ],
+                ),
+                const Divider(),
+                const Expanded(
+                  child: Center(
+                    child: Text(
+                      'You do not have enough balance to send withdraw request',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    if (withdrawModel.meta!.total != 0) {
+      return Dialog(
+        child: Container(
+          height: 160.h,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Text('Send A Withdraw Request'),
+                    const Spacer(),
+                    IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        icon: Icon(Icons.cancel))
+                  ],
+                ),
+                const Divider(),
+                GlobalTextField(
+                  controller: amountController,
+                  keyboardType: TextInputType.number,
+                  hintText: 'Enter Amount',
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                GlobalTextField(
+                  controller: messageController,
+                  keyboardType: TextInputType.text,
+                  hintText: 'message',
+                )
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    return null;
   }
-
-
 
   var nameController = TextEditingController();
   var phoneController = TextEditingController();
@@ -93,6 +160,7 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
   bool bankStatus = false;
 
   late UpdateProfileModel updateProfileModel;
+
   void updateProfile({
     required String name,
     required String phone,
@@ -130,7 +198,6 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
     });
   }
 
-
   var nameShopController = TextEditingController();
   var phoneShopController = TextEditingController();
   var addressShopController = TextEditingController();
@@ -164,6 +231,26 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
     });
   }
 
+  void requestWithdraw({
+    required String amount,
+    required String message,
+  }) {
+    emit(ShaorjahLoadingUpdateShop());
+    DioHelper.postData(
+      url: requestWithdraws,
+      token: token,
+      data: {
+        'amount': amount,
+        'message': message,
+      },
+    ).then((value) {
+      _updateProfileModel = UpdateProfileModel.fromJson(value.data);
+      emit(ShaorjahSuccessUpdateShop(_updateProfileModel));
+    }).catchError((error) {
+      emit(ShaorjahErrorUpdateShop(error.toString()));
+    });
+  }
+
   var facebookController = TextEditingController();
   var instagramController = TextEditingController();
   var twitterController = TextEditingController();
@@ -171,6 +258,7 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
   var youtubeController = TextEditingController();
 
   late UpdateProfileModel _updateShopSocial;
+
   void updateShopSocial({
     required String facebook,
     required String instagram,
@@ -210,8 +298,8 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
     });
   }
 
-
   late NotificationModel notificationModel;
+
   void getNotification() {
     emit(SharojahLoadingGetNotificationState());
     DioHelper.getData(
@@ -219,10 +307,25 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
       token: token,
     ).then((value) {
       notificationModel = NotificationModel.fromJson(value.data);
-      print(notificationModel.data!.length);
       emit(SharojahSuccessGetNotificationState());
     }).catchError((error) {
       emit(SharojahErrorGetNotificationState(error));
+    });
+  }
+
+  late WithdrawModel withdrawModel;
+
+  void getWithdraw() {
+    emit(SharojahLoadingGetWithdrawState());
+    DioHelper.getData(
+      url: withdraw,
+      token: token,
+    ).then((value) {
+      withdrawModel = WithdrawModel.fromJson(value.data);
+      print(withdrawModel.data!.length);
+      emit(SharojahSuccessGetWithdrawState());
+    }).catchError((error) {
+      emit(SharojahErrorGetWithdrawState(error));
     });
   }
 
@@ -257,6 +360,7 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
   }
 
   late Top12ProductModel model;
+
   void getProductData() {
     emit(SharojahLoadingGetHomePageState());
     DioHelper.getData(

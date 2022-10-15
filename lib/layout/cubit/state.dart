@@ -1,5 +1,4 @@
 import 'package:alshorjah_app/model/ShaorjahLoginModel.dart';
-import 'package:alshorjah_app/model/ShaorjahRegisterModel.dart';
 import 'package:alshorjah_app/model/Update_Profile.dart';
 
 abstract class AlshorjahStates{}
@@ -110,4 +109,14 @@ class SharojahSuccessGetNotificationState extends AlshorjahStates {}
 class SharojahErrorGetNotificationState extends AlshorjahStates {
   final String e;
   SharojahErrorGetNotificationState(this.e);
+}
+
+
+class SharojahLoadingGetWithdrawState extends AlshorjahStates {}
+
+class SharojahSuccessGetWithdrawState extends AlshorjahStates {}
+
+class SharojahErrorGetWithdrawState extends AlshorjahStates {
+  final String e;
+  SharojahErrorGetWithdrawState(this.e);
 }

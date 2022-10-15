@@ -18,7 +18,10 @@ class SendWithdrawWidget extends StatelessWidget {
         var cubit = AlshorjahCubit.get(context);
         return InkWell(
           onTap: () {
-            cubit.openDialog();
+            showDialog(
+              context: context,
+              builder: (context) => cubit.openDialog(context) as Widget,
+            );
           },
           child: Container(
             width: double.infinity,
@@ -28,6 +31,7 @@ class SendWithdrawWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+
                 CircleAvatar(
                   child: Icon(
                     Icons.add,
