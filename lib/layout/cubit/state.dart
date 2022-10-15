@@ -13,6 +13,8 @@ class AlshorjahChangeShowPasswordState extends  AlshorjahStates{}
 
 class SaveValueTextState extends  AlshorjahStates{}
 
+class ShowDialogState extends  AlshorjahStates{}
+
 
 class ShaorjahChangeTextFormFieldState extends  AlshorjahStates{}
 
@@ -33,8 +35,7 @@ class SharojahLoadingGetUserState extends AlshorjahStates {}
 
 class SharojahSuccessGetUserState extends AlshorjahStates {}
 
-class SharojahErrorGetUserState extends AlshorjahStates
-{
+class SharojahErrorGetUserState extends AlshorjahStates {
   final String e;
   SharojahErrorGetUserState(this.e);
 }
@@ -99,4 +100,14 @@ class ShaorjahSuccessUpdateShopSocial extends  AlshorjahStates {
 class ShaorjahErrorUpdateShopSocial extends  AlshorjahStates {
   final String error;
   ShaorjahErrorUpdateShopSocial(this.error);
+}
+
+
+class SharojahLoadingGetNotificationState extends AlshorjahStates {}
+
+class SharojahSuccessGetNotificationState extends AlshorjahStates {}
+
+class SharojahErrorGetNotificationState extends AlshorjahStates {
+  final String e;
+  SharojahErrorGetNotificationState(this.e);
 }

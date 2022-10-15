@@ -42,19 +42,21 @@ class ItemProductWidget extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
                 child: Row(
                   children: [
-                    Text(
-                      model.currentStock.toString(),
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        color: Colors.black54,
-                        decoration: TextDecoration.lineThrough,
+
+                    if (model.unitPriceBeforeDiscount != '\$0.0')
+                      Text(
+                        model.unitPriceBeforeDiscount.toString(),
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: Colors.black54,
+                          decoration: TextDecoration.lineThrough,
+                        ),
                       ),
-                    ),
                     SizedBox(
                       width: 10.w,
                     ),
                     Text(
-                      model.price.toString(),
+                      model.unitPrice.toString(),
                       style: TextStyle(
                           fontSize: 12.sp,
                           color: ColorManager.buttonColor.withAlpha(200),

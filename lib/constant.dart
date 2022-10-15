@@ -10,7 +10,7 @@ String login = '/auth/login';
 
 
 
-String UpdateProfile = '/profile/update?name=.&phone=&new_password=&confirm_password=&photo=&cash_on_delivery_status=&bank_payment_status=&bank_name&bank_acc_name&bank_acc_no=&bank_routing_no=';
+String UpdateProfile = '/profile/update';
 
 // String register = '/auth/signup';
 
@@ -18,8 +18,9 @@ String user = '/get-user-by-access_token?access_token=$token';
 
 String shopSettings = '/seller/shop/info';
 
-String updateShop = '/seller/shop-update?name=&address=&phone=&meta_title=&meta_description=&logo&delivery_pickup_longitude=&delivery_pickup_latitude=&facebook=&instagram=&google=&twitter=&youtube=&cash_on_delivery_status=&bank_payment_status=&bank_name=&bank_acc_name=&bank_routing_no=';
-String updateShopSocials = '/seller/shop-update?facebook=&instagram=&google=&twitter=&youtube=';
+String notification = '/seller/all-notification';
+
+String updateShop = '/seller/shop-update';
 
 String homePage = '/seller/dashboard';
 

@@ -40,7 +40,9 @@ class MyApp extends StatelessWidget {
               ..getUserData()
               ..getShopSettingData()
               ..getHomePageData()
-              ..getProductData(),
+              ..getProductData()
+              ..getNotification()
+            ,
           ),
         ],
         child: BlocConsumer<AlshorjahCubit, AlshorjahStates>(

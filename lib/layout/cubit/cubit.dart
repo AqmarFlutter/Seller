@@ -2,6 +2,7 @@ import 'package:alshorjah_app/global_presentation/network/remote/dio_helper.dart
 import 'package:alshorjah_app/layout/cubit/state.dart';
 import 'package:alshorjah_app/model/HomeModel/HomePageModel.dart';
 import 'package:alshorjah_app/model/HomeModel/Top12ProductModel.dart';
+import 'package:alshorjah_app/model/NotificationModel.dart';
 import 'package:alshorjah_app/model/ProfileModel.dart';
 import 'package:alshorjah_app/model/ShopSettingsModel.dart';
 import 'package:alshorjah_app/model/Update_Profile.dart';
@@ -10,6 +11,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constant.dart';
 import '../../model/ShaorjahLoginModel.dart';
 import '../../modules/home/views/home_screen.dart';
@@ -63,6 +65,18 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
     });
   }
 
+  void openDialog()
+  {
+    Dialog(
+      child: Container(
+        height: 70.h,
+        width: double.infinity,
+        color: Colors.red,
+      ),
+      backgroundColor: Colors.red,
+    );
+    emit(ShowDialogState());
+  }
 
 
 
@@ -109,6 +123,7 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
       },
     ).then((value) {
       updateProfileModel = UpdateProfileModel.fromJson(value.data);
+      print(updateProfileModel.result);
       emit(ShaorjahSuccessUpdateProfile(updateProfileModel));
     }).catchError((error) {
       emit(ShaorjahErrorUpdateProfile(error.toString()));
@@ -165,7 +180,7 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
   }) {
     emit(ShaorjahLoadingUpdateShopSocial());
     DioHelper.postData(
-      url: updateShopSocials,
+      url: updateShop,
       token: token,
       data: {
         'facebook': facebook,
@@ -176,7 +191,6 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
       },
     ).then((value) {
       _updateShopSocial = UpdateProfileModel.fromJson(value.data);
-      print(_updateShopSocial.result);
       emit(ShaorjahSuccessUpdateShopSocial(_updateShopSocial));
     }).catchError((error) {
       emit(ShaorjahErrorUpdateShopSocial(error.toString()));
@@ -193,6 +207,22 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
       emit(SharojahSuccessGetUserState());
     }).catchError((error) {
       emit(SharojahErrorGetUserState(error));
+    });
+  }
+
+
+  late NotificationModel notificationModel;
+  void getNotification() {
+    emit(SharojahLoadingGetNotificationState());
+    DioHelper.getData(
+      url: notification,
+      token: token,
+    ).then((value) {
+      notificationModel = NotificationModel.fromJson(value.data);
+      print(notificationModel.data!.length);
+      emit(SharojahSuccessGetNotificationState());
+    }).catchError((error) {
+      emit(SharojahErrorGetNotificationState(error));
     });
   }
 

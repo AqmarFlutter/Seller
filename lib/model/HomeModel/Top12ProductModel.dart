@@ -25,7 +25,8 @@ class ProductModel {
   int? id;
   String? name;
   String? thumbnailImg;
-  String? price;
+  String? unitPrice;
+  String? unitPriceBeforeDiscount;
   int? currentStock;
   bool? status;
   String? category;
@@ -35,7 +36,8 @@ class ProductModel {
       {this.id,
         this.name,
         this.thumbnailImg,
-        this.price,
+        this.unitPrice,
+        this.unitPriceBeforeDiscount,
         this.currentStock,
         this.status,
         this.category,
@@ -45,7 +47,8 @@ class ProductModel {
     id = json['id'];
     name = json['name'];
     thumbnailImg = json['thumbnail_img'];
-    price = json['price'];
+    unitPrice = json['unit_price'];
+    unitPriceBeforeDiscount = json['unit_price_before_discount'];
     currentStock = json['current_stock'];
     status = json['status'];
     category = json['category'];
@@ -57,7 +60,8 @@ class ProductModel {
     data['id'] = this.id;
     data['name'] = this.name;
     data['thumbnail_img'] = this.thumbnailImg;
-    data['price'] = this.price;
+    data['unit_price'] = this.unitPrice;
+    data['unit_price_before_discount'] = this.unitPriceBeforeDiscount;
     data['current_stock'] = this.currentStock;
     data['status'] = this.status;
     data['category'] = this.category;
