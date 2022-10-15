@@ -63,7 +63,7 @@ class PaymentSettingScreen extends StatelessWidget {
                           onPressed: () {
                             cubit.updateProfile(
                               name: cubit.nameController.text,
-                              phone: cubit.phoneController.text,
+                              email: cubit.emailController.text,
                               password: cubit.newPasswordController.text,
                               confirmPassword:
                                   cubit.confirmPasswordController.text,

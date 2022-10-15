@@ -148,7 +148,7 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
   }
 
   var nameController = TextEditingController();
-  var phoneController = TextEditingController();
+  var emailController = TextEditingController();
   var newPasswordController = TextEditingController();
   var confirmPasswordController = TextEditingController();
   var bankNameController = TextEditingController();
@@ -163,7 +163,7 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
 
   void updateProfile({
     required String name,
-    required String phone,
+    required String email,
     required String password,
     required String confirmPassword,
     required bool cashPayment,
@@ -179,7 +179,7 @@ class AlshorjahCubit extends Cubit<AlshorjahStates> {
       token: token,
       data: {
         'name': name,
-        'phone': phone,
+        'email': email,
         'new_password': password,
         'confirm_password': confirmPassword,
         'cash_on_delivery_status': cashPayment,

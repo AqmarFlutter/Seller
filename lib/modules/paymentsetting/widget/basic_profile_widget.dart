@@ -75,8 +75,8 @@ class BasicProfileWidget extends StatelessWidget {
                 height: 15.h,
               ),
               GlobalTextField(
-                keyboardType: TextInputType.phone,
-                controller: cubit.phoneController,
+                keyboardType: TextInputType.emailAddress,
+                controller: cubit.emailController,
                 hintText: cubit.userData.email,
               ),
               SizedBox(
